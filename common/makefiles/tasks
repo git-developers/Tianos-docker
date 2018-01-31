@@ -1,0 +1,10 @@
+ts := $(shell /bin/date "+%Y-%m-%d . %H:%M:%S")
+
+save:
+	git add .
+	git commit -m "modificaciones hechas el: $(ts)"
+ifeq ($(http), 1)
+	git push origin_http master
+else
+	git push origin master
+endif
