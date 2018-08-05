@@ -49,6 +49,7 @@ echo "Running container:"
 #HOST -> GUEST
 
 echo "-" # -idt
+#--privileged \
 echo "Running container:"
 docker run \
 --interactive \
@@ -58,7 +59,7 @@ docker run \
 --env MYSQL_ROOT_PASSWORD=root \
 --env MYSQL_DATABASE=tianos \
 --add-host tianos.lo:172.17.0.2 \
---volume $PWD/../tianos:/tianos/ \
+--volume $PWD/../Tianos:/tianos/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
 --name tianos-container tianos-image

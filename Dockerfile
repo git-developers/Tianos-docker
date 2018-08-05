@@ -29,16 +29,31 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y python-software-properties
 
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
-RUN apt-get update -y
+RUN apt-get update -y --fix-missing
 
-RUN apt-get -y install php7.1
-RUN apt-get -y install php7.1-fpm
-RUN apt-get -y install php7.1-mysql
-RUN apt-get -y install php7.1-curl
-RUN apt-get -y install php7.1-mcrypt
-RUN apt-get -y install php7.1-cli
-RUN apt-get -y install php7.1-dev
-RUN apt-get -y install php7.1-intl
+#RUN apt-get -y install php7.1
+#RUN apt-get -y install php7.1-fpm
+#RUN apt-get -y install php7.1-mysql
+#RUN apt-get -y install php7.1-curl
+#RUN apt-get -y install php7.1-mcrypt
+#RUN apt-get -y install php7.1-cli
+#RUN apt-get -y install php7.1-dev
+#RUN apt-get -y install php7.1-intl
+#RUN apt-get -y install php7.1-xml
+#RUN apt-get -y install php7.1-mbstring
+
+RUN apt-get -y install php7.0-cli php7.0-common libapache2-mod-php7.0
+RUN apt-get -y install php7.0
+RUN apt-get -y install php7.0-fpm
+RUN apt-get -y install php7.0-mysql
+RUN apt-get -y install php7.0-curl
+RUN apt-get -y install php7.0-mcrypt
+RUN apt-get -y install php7.0-cli
+RUN apt-get -y install php7.0-dev
+RUN apt-get -y install php7.0-intl
+RUN apt-get -y install php7.0-xml
+RUN apt-get -y install php7.0-mbstring
+
 RUN apt-get -y install libsasl2-dev
 RUN apt-get -y install redis-server
 #RUN apt-get -y install openjdk-8-jre
@@ -51,7 +66,7 @@ RUN apt-get -y install libicu-dev
 RUN apt-get -y install nginx
 RUN apt-get -y install build-essential
 RUN apt-get -y install phpunit
-RUN apt-get -y install php-mbstring
+#RUN apt-get -y install php-mbstring
 
 
 ### para instalar MYSQL
@@ -69,22 +84,22 @@ RUN apt-get -y install libsodium-dev
 RUN apt-get -y install php-pear
 RUN apt-get -y install pkg-config
 RUN apt-get -y install libzmq-dev
-RUN yes '' | pecl install zmq-beta
-RUN wget --directory-prefix /home https://archive.org/download/zeromq_4.1.4/zeromq-4.1.4.tar.gz # Latest tarball on 07/08/2016
-RUN tar -xvzf /home/zeromq-4.1.4.tar.gz -C /home
-RUN cd /home/zeromq-4.1.4; ./configure
-RUN cd /home/zeromq-4.1.4/; make
-RUN cd /home/zeromq-4.1.4; make install
-RUN cd /home/zeromq-4.1.4; ldconfig
+#RUN yes '' | pecl install zmq-beta
+#RUN wget --directory-prefix /home https://archive.org/download/zeromq_4.1.4/zeromq-4.1.4.tar.gz # Latest tarball on 07/08/2016
+#RUN tar -xvzf /home/zeromq-4.1.4.tar.gz -C /home
+#RUN cd /home/zeromq-4.1.4; ./configure
+#RUN cd /home/zeromq-4.1.4/; make
+#RUN cd /home/zeromq-4.1.4; make install
+#RUN cd /home/zeromq-4.1.4; ldconfig
 ## Install ZeroMQ
 
 
 ## Installing the PHP binding
-RUN mkdir -p /home/php-zmq
-RUN git clone https://github.com/mkoppanen/php-zmq.git /home/php-zmq
-RUN cd /home/php-zmq; phpize && ./configure
-RUN cd /home/php-zmq; make
-RUN cd /home/php-zmq; make install
+#RUN mkdir -p /home/php-zmq
+#RUN git clone https://github.com/mkoppanen/php-zmq.git /home/php-zmq
+#RUN cd /home/php-zmq; phpize && ./configure
+#RUN cd /home/php-zmq; make
+#RUN cd /home/php-zmq; make install
 ## Installing the PHP binding
 
 
