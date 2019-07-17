@@ -54,6 +54,13 @@ RUN apt-get -y install php7.0-intl
 RUN apt-get -y install php7.0-xml
 RUN apt-get -y install php7.0-mbstring
 
+
+RUN apt-get -f install
+RUN apt-get update
+RUN apt-get -y purge php7.0-gd
+RUN apt-get -y install php7.0-gd
+
+
 RUN apt-get -y install libsasl2-dev
 RUN apt-get -y install redis-server
 #RUN apt-get -y install openjdk-8-jre

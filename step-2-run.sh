@@ -51,6 +51,7 @@ echo "Running container:"
 echo "-" # -idt
 #--privileged \
 echo "Running container:"
+
 docker run \
 --interactive \
 --detach \
@@ -63,6 +64,8 @@ docker run \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
 --name tianos-container tianos-image
+
+
 
 #docker run \
 #--interactive \
