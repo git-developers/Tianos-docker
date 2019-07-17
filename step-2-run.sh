@@ -7,10 +7,10 @@ sudo chmod 0777 /var/run/docker.sock
 
 echo "-"
 echo "Stopping container:"
-docker stop tianos-container --time 10
+docker stop manguitos-container --time 10
 echo "-"
 echo "Removing container: "
-docker rm tianos-container
+docker rm manguitos-container
 
 
 echo "-"
@@ -33,9 +33,9 @@ fi
 
 
 # para poder ejecutar la opcion "--net", primero se tiene que ejecutar la linea de abajo
-#docker network rm tianos-net
-#docker network disconnect --force tianos-net
-# docker network create --subnet=172.18.0.0/16 tianos-net
+#docker network rm manguitos-net
+#docker network disconnect --force manguitos-net
+# docker network create --subnet=172.18.0.0/16 manguitos-net
 
 
 
@@ -45,7 +45,7 @@ echo "Running container:"
 
 
 #DOCKER RUN
-#--volume $PWD/../tianos:/tianos/ \
+#--volume $PWD/../manguitos:/manguitos/ \
 #HOST -> GUEST
 
 echo "-" # -idt
@@ -58,12 +58,12 @@ docker run \
 --tty \
 --publish 0.0.0.0:1234:3306 \
 --env MYSQL_ROOT_PASSWORD=root \
---env MYSQL_DATABASE=tianos \
---add-host tianos.lo:172.17.0.2 \
---volume $PWD/../Tianos:/tianos/ \
+--env MYSQL_DATABASE=manguitos \
+--add-host manguitos.lo:172.17.0.2 \
+--volume $PWD/../Manguitos:/manguitos/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
---name tianos-container tianos-image
+--name manguitos-container manguitos-image
 
 
 
@@ -71,38 +71,38 @@ docker run \
 #--interactive \
 #--detach \
 #--tty \
-#--net tianos-net --ip 172.18.0.22 \
+#--net manguitos-net --ip 172.18.0.22 \
 #--publish 0.0.0.0:81:80 \
-#--add-host tianos.lo:172.17.0.3 \
-#--volume $PWD/../tianos:/tianos/ \
+#--add-host manguitos.lo:172.17.0.3 \
+#--volume $PWD/../manguitos:/manguitos/ \
 #--volume $PWD/data/mysql/:/var/lib/mysql/ \
 #--user "root:root" \
-#--name tianos-container tianos-image
+#--name manguitos-container manguitos-image
 
 
 #NETWORK
 #docker network ls
-#docker network create tianos-net
+#docker network create manguitos-net
 
 
 echo "-"
 echo "Starting services:"
-docker exec -d tianos-container chown -Rv mysql:root /var/run/mysqld/
-docker exec -d tianos-container chgrp -Rv mysql /var/run/mysqld/
+docker exec -d manguitos-container chown -Rv mysql:root /var/run/mysqld/
+docker exec -d manguitos-container chgrp -Rv mysql /var/run/mysqld/
 
-docker exec -d tianos-container chown -Rv mysql:mysql /var/lib/mysql
-docker exec -d tianos-container chgrp -Rv mysql /var/lib/mysql
+docker exec -d manguitos-container chown -Rv mysql:mysql /var/lib/mysql
+docker exec -d manguitos-container chgrp -Rv mysql /var/lib/mysql
 
-docker exec -d tianos-container chown -Rv mysql:mysql /etc/mysql/
-docker exec -d tianos-container chgrp -Rv mysql /etc/mysql/
+docker exec -d manguitos-container chown -Rv mysql:mysql /etc/mysql/
+docker exec -d manguitos-container chgrp -Rv mysql /etc/mysql/
 
-docker exec -d tianos-container service mysql start
-docker exec -d tianos-container service nginx start
-docker exec -d tianos-container service php7.1-fpm start
-#docker exec -d tianos-container service redis-server start
-#docker exec -d tianos-container service elasticsearch start
-#docker exec -d tianos-container service supervisor start
+docker exec -d manguitos-container service mysql start
+docker exec -d manguitos-container service nginx start
+docker exec -d manguitos-container service php7.1-fpm start
+#docker exec -d manguitos-container service redis-server start
+#docker exec -d manguitos-container service elasticsearch start
+#docker exec -d manguitos-container service supervisor start
 
 
-echo "Entrando al bash de la imagen tianos:"
-docker exec -i -t tianos-container /bin/bash
+echo "Entrando al bash de la imagen manguitos:"
+docker exec -i -t manguitos-container /bin/bash

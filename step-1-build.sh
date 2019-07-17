@@ -5,13 +5,13 @@
 #* sudo apt-get install docker
 #* sudo apt install docker.io
 
-rm -rf tianos
+rm -rf manguitos
 sudo chmod 0777 -R data/
-docker stop tianos-container
-docker rm tianos-container
+docker stop manguitos-container
+docker rm manguitos-container
 
 echo "clonando repositorio..."
 #chmod 0600 common/jafeth-xalok.rsa
-#git clone http://gitlab.ec.pe/jafeth.bendezu/tianos.git
+#git clone http://gitlab.ec.pe/jafeth.bendezu/manguitos.git
 
-docker build -t tianos-image .
+docker build -t manguitos-image .
