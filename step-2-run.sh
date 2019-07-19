@@ -63,7 +63,7 @@ docker run \
 --volume $PWD/../Manguitos:/manguitos/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
---name manguitos-container manguitos-image
+--name manguitos-container tianos-image
 
 
 
