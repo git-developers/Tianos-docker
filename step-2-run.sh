@@ -7,10 +7,10 @@ sudo chmod 0777 /var/run/docker.sock
 
 echo "-"
 echo "Stopping container:"
-docker stop manguitos-container --time 10
+docker stop shoes-erp-container --time 10
 echo "-"
 echo "Removing container: "
-docker rm manguitos-container
+docker rm shoes-erp-container
 
 
 echo "-"
@@ -33,9 +33,9 @@ fi
 
 
 # para poder ejecutar la opcion "--net", primero se tiene que ejecutar la linea de abajo
-#docker network rm manguitos-net
-#docker network disconnect --force manguitos-net
-# docker network create --subnet=172.18.0.0/16 manguitos-net
+#docker network rm shoes-erp-net
+#docker network disconnect --force shoes-erp-net
+# docker network create --subnet=172.18.0.0/16 shoes-erp-net
 
 
 
@@ -45,7 +45,7 @@ echo "Running container:"
 
 
 #DOCKER RUN
-#--volume $PWD/../manguitos:/manguitos/ \
+#--volume $PWD/../shoes-erp:/shoes-erp/ \
 #HOST -> GUEST
 
 echo "-" # -idt
@@ -58,12 +58,12 @@ docker run \
 --tty \
 --publish 0.0.0.0:1234:3306 \
 --env MYSQL_ROOT_PASSWORD=root \
---env MYSQL_DATABASE=manguitos \
---add-host manguitos.lo:172.17.0.2 \
---volume $PWD/../Manguitos:/manguitos/ \
+--env MYSQL_DATABASE=shoes-erp \
+--add-host shoes-erp.lo:172.17.0.2 \
+--volume $PWD/../shoes-erp:/shoes-erp/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
---name manguitos-container tianos-image
+--name shoes-erp-container tianos-image
 
 
 
@@ -71,38 +71,38 @@ docker run \
 #--interactive \
 #--detach \
 #--tty \
-#--net manguitos-net --ip 172.18.0.22 \
+#--net shoes-erp-net --ip 172.18.0.22 \
 #--publish 0.0.0.0:81:80 \
-#--add-host manguitos.lo:172.17.0.3 \
-#--volume $PWD/../manguitos:/manguitos/ \
+#--add-host shoes-erp.lo:172.17.0.3 \
+#--volume $PWD/../shoes-erp:/shoes-erp/ \
 #--volume $PWD/data/mysql/:/var/lib/mysql/ \
 #--user "root:root" \
-#--name manguitos-container manguitos-image
+#--name shoes-erp-container shoes-erp-image
 
 
 #NETWORK
 #docker network ls
-#docker network create manguitos-net
+#docker network create shoes-erp-net
 
 
 echo "-"
 echo "Starting services:"
-docker exec -d manguitos-container chown -Rv mysql:root /var/run/mysqld/
-docker exec -d manguitos-container chgrp -Rv mysql /var/run/mysqld/
+docker exec -d shoes-erp-container chown -Rv mysql:root /var/run/mysqld/
+docker exec -d shoes-erp-container chgrp -Rv mysql /var/run/mysqld/
 
-docker exec -d manguitos-container chown -Rv mysql:mysql /var/lib/mysql
-docker exec -d manguitos-container chgrp -Rv mysql /var/lib/mysql
+docker exec -d shoes-erp-container chown -Rv mysql:mysql /var/lib/mysql
+docker exec -d shoes-erp-container chgrp -Rv mysql /var/lib/mysql
 
-docker exec -d manguitos-container chown -Rv mysql:mysql /etc/mysql/
-docker exec -d manguitos-container chgrp -Rv mysql /etc/mysql/
+docker exec -d shoes-erp-container chown -Rv mysql:mysql /etc/mysql/
+docker exec -d shoes-erp-container chgrp -Rv mysql /etc/mysql/
 
-docker exec -d manguitos-container service mysql start
-docker exec -d manguitos-container service nginx start
-docker exec -d manguitos-container service php7.1-fpm start
-#docker exec -d manguitos-container service redis-server start
-#docker exec -d manguitos-container service elasticsearch start
-#docker exec -d manguitos-container service supervisor start
+docker exec -d shoes-erp-container service mysql start
+docker exec -d shoes-erp-container service nginx start
+docker exec -d shoes-erp-container service php7.1-fpm start
+#docker exec -d shoes-erp-container service redis-server start
+#docker exec -d shoes-erp-container service elasticsearch start
+#docker exec -d shoes-erp-container service supervisor start
 
 
-echo "Entrando al bash de la imagen manguitos:"
-docker exec -i -t manguitos-container /bin/bash
+echo "Entrando al bash de la imagen shoes-erp:"
+docker exec -i -t shoes-erp-container /bin/bash
