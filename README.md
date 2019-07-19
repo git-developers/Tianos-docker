@@ -36,44 +36,46 @@ mysql
 
 DOCKER 
 ======
-* -p, --publish :: Publish a container's port(s) to the host (default [])
-* -v, --volume :: Bind mount a volume (default [])
+* [Publish a container's port(s) to the host (default [])](#x)
+    * -p, --publish :: 
+* [Bind mount a volume (default [])](#x)
+    * -v, --volume
 * --hostname to specify a hostname
 * --add-host to add more entries to /etc/hosts
 * .
-* To list all containers on your system using ps option, but ps will show only running containers. So to view all containers use -a parameter with ps.
+* [To list all containers on your system using ps option, but ps will show only running containers. So to view all containers use -a parameter with ps.](#x)
     * docker ps -a
-* To find all images on your system
+* [To find all images on your system](#x)
     * docker images
-* Crear container, aunque ya exista
+* [Crear container, aunque ya exista](#x)
     * docker run -it --rm xalok
-* Remove Docker Containers
+* [Remove Docker Containers](#x)
     * docker rm <CONTAINER ID>
-* Remove Docker Images
+* [Remove Docker Images](#x)
     * docker rmi <IMAGE ID> --force
-* Stop & Remove All Docker Containers
+* [Stop & Remove All Docker Containers](#x)
     * docker stop $(docker ps -a -q)
     * docker rm $(docker ps -a -q)
     * docker stop $(docker ps -a -q); docker rm $(docker ps -a -q);
-* Stop docker
+* [Stop docker](#x)
     * docker ps -a -q --filter="name=<containerName>"
     * docker ps -a -q --filter="name=xalok"
-* How to delete cache?
+* [How to delete cache?](#x)
     * docker system prune -a
-* Tag
+* [Tag](#x)
     * docker tag <IMAGE ID> <NOMBRE>:<VERSION>
     * docker tag 9f676bd305a4 ubuntu:13.10
-* Listar volumes
+* [Listar volumes](#x)
     * docker volume ls ##lista volumes
     * docker volume rm <volume_name> ##elimina volumes
-* Dentro del docker, ver volumes
+* [Dentro del docker, ver volumes](#x)
     * df -h
-* Info del docker
+* [Info del docker](#x)
     * docker -D info
-* docker version
+* [docker version](#x)
     * docker version
-* Logs
+* [Logs](#x)
     * docker logs <CONTAINER_ID>
-* Deleting the networking files fixes it for me
+* [Deleting the networking files fixes it for me](#x)
     *   rm -rf /var/lib/docker/network/files/*
 
