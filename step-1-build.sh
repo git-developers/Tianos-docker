@@ -5,13 +5,13 @@
 #* sudo apt-get install docker
 #* sudo apt install docker.io
 
-rm -rf manguitos
+rm -rf shoes-erp
 sudo chmod 0777 -R data/
-docker stop manguitos-container
-docker rm manguitos-container
+docker stop shoes-erp-container
+docker rm shoes-erp-container
 
 echo "clonando repositorio..."
 #chmod 0600 common/jafeth-xalok.rsa
-#git clone http://gitlab.ec.pe/jafeth.bendezu/manguitos.git
+#git clone http://gitlab.ec.pe/jafeth.bendezu/shoes-erp.git
 
-docker build -t manguitos-image .
+docker build -t shoes-erp-image .
