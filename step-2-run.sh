@@ -60,7 +60,7 @@ docker run \
 --env MYSQL_ROOT_PASSWORD=root \
 --env MYSQL_DATABASE=shoes-erp \
 --add-host shoes-erp.lo:172.17.0.2 \
---volume $PWD/../shoes-erp:/shoes-erp/ \
+--volume $PWD/../shoesErp:/shoes-erp/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
 --name shoes-erp-container tianos-image
