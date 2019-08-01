@@ -3,4 +3,4 @@ NOW := $(shell /bin/date "+%Y-%m-%d . %H:%M:%S")
 save:
 	git add .
 	git commit -m "Tianos said -> modifications made on: $(NOW)"
-	git push github shoes-erp
+	git push github e-commerce

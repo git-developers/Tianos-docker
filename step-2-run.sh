@@ -7,10 +7,10 @@ sudo chmod 0777 /var/run/docker.sock
 
 echo "-"
 echo "Stopping container:"
-docker stop shoes-erp-container --time 10
+docker stop e-commerce-container --time 10
 echo "-"
 echo "Removing container: "
-docker rm shoes-erp-container
+docker rm e-commerce-container
 
 
 echo "-"
@@ -33,9 +33,9 @@ fi
 
 
 # para poder ejecutar la opcion "--net", primero se tiene que ejecutar la linea de abajo
-#docker network rm shoes-erp-net
-#docker network disconnect --force shoes-erp-net
-# docker network create --subnet=172.18.0.0/16 shoes-erp-net
+#docker network rm e-commerce-net
+#docker network disconnect --force e-commerce-net
+# docker network create --subnet=172.18.0.0/16 e-commerce-net
 
 
 
@@ -45,7 +45,7 @@ echo "Running container:"
 
 
 #DOCKER RUN
-#--volume $PWD/../shoes-erp:/shoes-erp/ \
+#--volume $PWD/../e-commerce:/e-commerce/ \
 #HOST -> GUEST
 
 echo "-" # -idt
@@ -58,12 +58,12 @@ docker run \
 --tty \
 --publish 0.0.0.0:1234:3306 \
 --env MYSQL_ROOT_PASSWORD=root \
---env MYSQL_DATABASE=shoes-erp \
---add-host shoes-erp.lo:172.17.0.2 \
---volume $PWD/../shoesErp:/shoes-erp/ \
+--env MYSQL_DATABASE=e-commerce \
+--add-host e-commerce.lo:172.17.0.2 \
+--volume $PWD/../shoesErp:/e-commerce/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
---name shoes-erp-container tianos-image
+--name e-commerce-container tianos-image
 
 
 
@@ -71,38 +71,38 @@ docker run \
 #--interactive \
 #--detach \
 #--tty \
-#--net shoes-erp-net --ip 172.18.0.22 \
+#--net e-commerce-net --ip 172.18.0.22 \
 #--publish 0.0.0.0:81:80 \
-#--add-host shoes-erp.lo:172.17.0.3 \
-#--volume $PWD/../shoes-erp:/shoes-erp/ \
+#--add-host e-commerce.lo:172.17.0.3 \
+#--volume $PWD/../e-commerce:/e-commerce/ \
 #--volume $PWD/data/mysql/:/var/lib/mysql/ \
 #--user "root:root" \
-#--name shoes-erp-container shoes-erp-image
+#--name e-commerce-container e-commerce-image
 
 
 #NETWORK
 #docker network ls
-#docker network create shoes-erp-net
+#docker network create e-commerce-net
 
 
 echo "-"
 echo "Starting services:"
-docker exec -d shoes-erp-container chown -Rv mysql:root /var/run/mysqld/
-docker exec -d shoes-erp-container chgrp -Rv mysql /var/run/mysqld/
+docker exec -d e-commerce-container chown -Rv mysql:root /var/run/mysqld/
+docker exec -d e-commerce-container chgrp -Rv mysql /var/run/mysqld/
 
-docker exec -d shoes-erp-container chown -Rv mysql:mysql /var/lib/mysql
-docker exec -d shoes-erp-container chgrp -Rv mysql /var/lib/mysql
+docker exec -d e-commerce-container chown -Rv mysql:mysql /var/lib/mysql
+docker exec -d e-commerce-container chgrp -Rv mysql /var/lib/mysql
 
-docker exec -d shoes-erp-container chown -Rv mysql:mysql /etc/mysql/
-docker exec -d shoes-erp-container chgrp -Rv mysql /etc/mysql/
+docker exec -d e-commerce-container chown -Rv mysql:mysql /etc/mysql/
+docker exec -d e-commerce-container chgrp -Rv mysql /etc/mysql/
 
-docker exec -d shoes-erp-container service mysql start
-docker exec -d shoes-erp-container service nginx start
-docker exec -d shoes-erp-container service php7.1-fpm start
-#docker exec -d shoes-erp-container service redis-server start
-#docker exec -d shoes-erp-container service elasticsearch start
-#docker exec -d shoes-erp-container service supervisor start
+docker exec -d e-commerce-container service mysql start
+docker exec -d e-commerce-container service nginx start
+docker exec -d e-commerce-container service php7.1-fpm start
+#docker exec -d e-commerce-container service redis-server start
+#docker exec -d e-commerce-container service elasticsearch start
+#docker exec -d e-commerce-container service supervisor start
 
 
-echo "Entrando al bash de la imagen shoes-erp:"
-docker exec -i -t shoes-erp-container /bin/bash
+echo "Entrando al bash de la imagen e-commerce:"
+docker exec -i -t e-commerce-container /bin/bash
