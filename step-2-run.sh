@@ -60,7 +60,7 @@ docker run \
 --env MYSQL_ROOT_PASSWORD=root \
 --env MYSQL_DATABASE=e-commerce \
 --add-host e-commerce.lo:172.17.0.2 \
---volume $PWD/../shoesErp:/e-commerce/ \
+--volume $PWD/../eCommerce:/e-commerce/ \
 --volume $PWD/data/mysql/:/var/lib/mysql/ \
 --user "root:root" \
 --name e-commerce-container tianos-image
