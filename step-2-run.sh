@@ -8,6 +8,9 @@ sudo chmod 0777 /var/run/docker.sock
 echo "-"
 echo "Stopping container:"
 docker stop shoes-erp-container --time 10
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+echo "-"
 echo "-"
 echo "Removing container: "
 docker rm shoes-erp-container
